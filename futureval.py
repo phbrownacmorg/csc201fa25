@@ -6,6 +6,7 @@
 
 def main(args: list[str]) -> int:
     # Input: get the parameters of the loan
+    # Accumulator variable
     p: float = float(input('Please enter an amount to borrow: $'))
     rate: float = float(input('Please enter the interest rate, in percent: '))
     periods: int = int(input('How many months are in the life of the loan? '))
@@ -20,9 +21,10 @@ def main(args: list[str]) -> int:
     payment: float = 566.14
     monthly_rate: float = (rate / 12) / 100
     # Process (with output included)
-    for i in range(periods):
+    for i in range(periods): # Loop for the accumulator pattern
         # Add the interest
         interest: float = p * monthly_rate
+        # Update the accumulator
         p = p + interest
 
         # Subtract the payment
