@@ -14,9 +14,9 @@ def main(args: list[str]) -> int:
 
     # Initial output
     print('Borrowing $', p, 'at', rate, "% for", periods, 'months:')
-    print('Month\tInterest\t\tPayment\t\tBalance')
+    print('Month\tInterest\tPayment\t\tBalance')
     print('-' * 70)
-    print('Start\t\t\t\t\t\t$30000')
+    print('Start\t\t\t\t\t$30000')
 
     payment: float = 566.14
     monthly_rate: float = (rate / 12) / 100
@@ -31,7 +31,7 @@ def main(args: list[str]) -> int:
         p = p - payment
 
         # Print the new balance
-        print((i+1), '\t', interest, '\t', payment, '\t', p)
+        print((i+1), '\t', round(interest,2), '\t', payment, '\t', round(p, 2))
 
 
 
