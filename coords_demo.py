@@ -1,26 +1,27 @@
 from graphics import *
 
 def main(args: list[str]) -> int:
-    win: GraphWin = GraphWin("Graphics", 640, 480)
+    win: GraphWin = GraphWin("Graphics", 500, 500)
     win.setBackground('gray')
-    # Plot pixels
+    win.setCoords(-1, -1, 1, 1)         # 2x2 square with the origin in the center
+    # Plot pixels.  Positions are in raw pixels, unaffected by win.setCoords().
     win.plotPixel(10, 10, 'red')        # Upper left
-    win.plotPixel(630, 10, 'green')     # Upper right
-    win.plotPixel(10, 470, 'blue')      # Lower left
-    win.plotPixel(630, 470, 'black')    # Lower right
+    win.plotPixel(490, 10, 'green')     # Upper right
+    win.plotPixel(10, 490, 'blue')      # Lower left
+    win.plotPixel(490, 490, 'black')    # Lower right
 
-    center: Point = Point(320,240)      # Center of screen
+    center: Point = Point(0,0)          # Center of screen
     center.setOutline('yellow')
     center.draw(win)
 
     # Lines
-    west: Point = Point(160, 240)
-    east: Point = Point(480, 240)
+    west: Point = Point(-0.5, 0)
+    east: Point = Point(0.5, 0)
     line1: Line = Line(east, west)
     line1.draw(win)
 
-    north: Point = Point(320, 120)
-    south: Point = Point(320, 360)
+    north: Point = Point(0, .5)
+    south: Point = Point(0, -.5)
     line2: Line = Line(north, south)
     line2.setOutline('lightblue')
     line2.setWidth(3)
@@ -28,14 +29,14 @@ def main(args: list[str]) -> int:
     line2.draw(win)
 
     # Circles
-    circ: Circle = Circle(center, 30)
+    circ: Circle = Circle(center, .1)
     circ.setOutline('purple')
     circ.setFill('gold')
     circ.setWidth(3)
     circ.draw(win)
 
     # Rectangle
-    ese: Point = Point(480,300)
+    ese: Point = Point(.5,-0.25)
     rect = Rectangle(ese, south)
     # Draws transparent if no fill is specified
     rect.draw(win)
@@ -63,7 +64,7 @@ def main(args: list[str]) -> int:
 
 
     # Polygon
-    wsw: Point = Point(160, 300)
+    wsw: Point = Point(-.5, -.25)
     poly: Polygon = Polygon(west, wsw, south)
     poly.setFill('pink')
     poly.draw(win)
@@ -75,7 +76,7 @@ def main(args: list[str]) -> int:
     poly2.draw(win)
 
     # Text object
-    anchor: Point = Point(320, 40)
+    anchor: Point = Point(0, .9)
     instructions: Text = Text(anchor, 'Click to close window')
     instructions.draw(win)
 
