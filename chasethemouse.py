@@ -15,6 +15,20 @@ def makeEyes(r: float, w: GraphWin, color: str) -> list[GraphicsObject]:
         eye.setOutline(color)
     return eyes
 
+def makeWhiskers(r: float, w: GraphWin) -> list[GraphicsObject]:
+    whiskers: list[GraphicsObject] = []
+    innerR: float = 0.8 * r
+    outerR: float = 1.8 * r
+    whiskerDeg: float = 7
+    for side in [1, -1]:
+        for angleDeg in [-whiskerDeg, 0, whiskerDeg]:
+            angle: float = radians(angleDeg)
+            whisker = Line(Point(side * innerR * cos(angle), innerR*sin(angle)),
+                           Point(side * outerR * cos(angle), outerR * sin(angle))).draw(w)
+            whiskers.append(whisker)
+
+    return whiskers
+
 def makeMouseEars(r: float, w: GraphWin) -> list[GraphicsObject]:
     angle: float = radians(60)
     ears: list[GraphicsObject] = []
@@ -43,6 +57,7 @@ def makeMouse(r: float, w: GraphWin) -> list[GraphicsObject]:
         part.setFill('darkgray')
         part.setOutline('darkgray')
     mouse.extend(makeEyes(r, w, 'black'))
+    mouse.extend(makeWhiskers(r, w))
     return mouse
 
 def makeCat(r: float, w: GraphWin) -> list[GraphicsObject]:
@@ -52,6 +67,8 @@ def makeCat(r: float, w: GraphWin) -> list[GraphicsObject]:
         part.setFill('orange')
         part.setOutline('orange')
     cat.extend(makeEyes(r, w, 'green'))
+    cat.extend(makeWhiskers(r, w))
+
     # Move the cat off the screen
     moveTo(cat, Point(2, 0))
     return cat
