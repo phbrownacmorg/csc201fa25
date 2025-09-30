@@ -1,10 +1,19 @@
+def article(word: str) -> str:
+    result = 'a '
+    if word[0] in 'aeiou': # word starts with a vowel
+        result = 'an '
+    return result
+
 def printVerse(animal: str, sound: str):
+    anim_art = article(animal)
+    snd_art = article(sound)
     print('Old MacDonald had a farm, E-I-E-I-O!')
-    print('And on that farm he had a ' + animal +', E-I-E-I-O!')
-    print('With a ' + sound + ', ' + sound + ' here ', end='')
-    print('and a ' + sound + ', ' + sound + ' there,')
-    print('Here a ' + sound + ', there a ' + sound + ', ', end='')
-    print('everywhere a ' + sound + ', ' + sound + '!')
+    print('And on that farm he had ' + anim_art + animal + ', E-I-E-I-O!')
+    print('With ' + snd_art + sound + ', ' + sound + ' here ', end='')
+    print('and ' + snd_art + sound + ', ' + sound + ' there,')
+    print('Here ' + snd_art + sound + ', there ' + snd_art + sound + ', ', 
+          end='')
+    print('everywhere ' + snd_art + sound + ', ' + sound + '!')
     print('Old MacDonald had a farm, E-I-E-I-O!')
     print()
 
