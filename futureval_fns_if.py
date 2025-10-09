@@ -8,18 +8,33 @@ from graphics import *
 from typing import cast
 import math
 
+def read_pos_float(prompt: str) -> float:
+    """Reads a positive floating-point number, using PROMPT.  Returns 0 if
+    the input can't be read."""
+    result: float = 0
+    response: str = input(prompt)
+    # Get rid of characters that we can't use as part of the number, but that don't
+    #    break things to the point where we can't recover
+    dumpable_chars = ',-%$'
+    for c in dumpable_chars:
+        response = response.replace(c, '')
+
+    # Is it a number?
+    if response.count('.') <= 1 and response.replace('.', '').isdecimal():
+        result = float(response)
+
+    return result
+
 def read_loan() -> tuple[float, float, int]:
-    p, rate, periods = 0, 0, 0
-    try:
-        p = float(input('Please enter an amount to borrow: $'))
-        rate = float(input('Please enter the interest rate, in percent: '))
-        periods = int(input('How many months are in the life of the loan? '))
-        if (not p > 0) or (not rate > 0) or periods <= 0:
-            raise ValueError
-    except ValueError:
-        print('The balance, rate, and periods must all be positive numbers, with no dollar sign, commas, or percent sign.')
-    else:
-        print('Borrowing $', p, 'at', rate, "% for", periods, 'months:')
+    p: float = read_pos_float('Please enter an amount to borrow: $')
+    #float(input('Please enter an amount to borrow: $'))
+    # Annual rate
+    rate: float = read_pos_float('Please enter the interest rate, in percent: ')
+    periods: int = 0
+    periodsStr: str = input('How many months are in the life of the loan? ')
+    if periodsStr.isdecimal():
+        periods = int(periodsStr)
+    print('Borrowing $', p, 'at', rate, "% for", periods, 'months:')
     # Loan amount, annual interest rate, number of loan periods
     return p, rate, periods
 

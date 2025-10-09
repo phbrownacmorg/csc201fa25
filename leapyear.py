@@ -1,14 +1,14 @@
 from datetime import date
 
 def leapyear(year: int) -> bool:
-    leap = False # correct 3/4 of the time
+    leap: bool = False # correct 3/4 of the time
     if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
         leap = True
 
     return leap
 
 def verb_tense(year: int) -> str:
-    result = ''
+    result: str = ''
     current_year: int = date.today().year
     if year < current_year:
         result = 'past'
