@@ -11,9 +11,13 @@ def main(args: list[str]) -> int:
         else:
             print(e.args[0])
     else:
-        for i in range(10): # type: ignore
+        # Print table header
+        print(f"{'i':^3}\t{'x':^8}")
+        print('-' * 16)
+
+        for i in range(150): # type: ignore
             x = 3.9 * x * (1 - x) 
-            print(x)
+            print(f"{i:^3}\t{x:.6f}")
     return 0
 
 if __name__ == '__main__':
