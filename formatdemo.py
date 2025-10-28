@@ -15,6 +15,9 @@ def print_SSN(ssn: str) -> None:
     print(f"{ssn[:5]}: Zip code") # As zip code
 
 def print_date() -> None:
+    month_abbrevs: list[str] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    
     today: date = date.today()
     laborday = date(2025, 9, 1)
     print(f'{today.month}/{today.day}/{today.year}: American')
@@ -32,7 +35,7 @@ def print_date() -> None:
     print(f'{today:%A}, {today:%B} {today.day}, {today:%Y}: Full American')
     print(f'{today:%A} {today.day} {today:%B} {today:%Y}: Full British')
     print(f'{today:%d}-{today:%b}-{today:%y}: DOS (Microsoft)')
-
+    print(f'{today.day:02}-{month_abbrevs[today.month-1]}-{today.year%100:02}: DOS, no date format')
 
 def main(args: list[str]) -> int:
     print_phone('8648675309')
