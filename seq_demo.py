@@ -1,13 +1,13 @@
 def print_weekday_names() -> None:
-    weekday_names: list[str] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
-                                'Thursday', 'Friday', 'Saturday']
+    weekday_names: tuple[str, ...] = ('Sunday', 'Monday', 'Tuesday', 'Wednesday',
+                                'Thursday', 'Friday', 'Saturday')
     
     # Create three-letter abbrevs using the accumulator pattern
     weekday_3LA: list[str] = []
     for name in weekday_names:
         weekday_3LA.append(name[:3])
     # Create three-letter abbreviations using a list comprehension
-    weekday_3LA_2: list[str] = [d[:3] for d in weekday_names]
+    weekday_3LA_2: tuple[str, ...] = tuple([d[:3] for d in weekday_names])
     print(f'{weekday_names}\n{weekday_3LA}\n{weekday_3LA_2}')
 
 def string_to_number_list(s: str) -> list[float]:

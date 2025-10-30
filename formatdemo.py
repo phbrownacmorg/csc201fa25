@@ -15,8 +15,8 @@ def print_SSN(ssn: str) -> None:
     print(f"{ssn[:5]}: Zip code") # As zip code
 
 def print_date() -> None:
-    month_abbrevs: list[str] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    month_abbrevs: tuple[str, ...] = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
     
     today: date = date.today()
     laborday = date(2025, 9, 1)
