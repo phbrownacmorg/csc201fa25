@@ -1,3 +1,7 @@
+# Don't save automatically-generated CSV files
+names.csv
+userids.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
