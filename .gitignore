@@ -1,6 +1,8 @@
 # Don't save automatically-generated CSV files
 # names.csv
 # userids.csv
+*.bak
+*.bak2
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -1,6 +1,7 @@
 from csv import DictReader, DictWriter
+from pathlib import Path
 
-def read_names(filename: str) -> list[dict[str,str]]:
+def read_names(filename: Path) -> list[dict[str,str]]:
     namelist: list[dict[str,str]] = []
     with open(filename) as f:
         reader = DictReader(f)
@@ -24,9 +25,24 @@ def make_id(namedict: dict[str,str]) -> str:
 
     return id + '001'
 
-def write_ids(namelist: list[dict[str, str]], filename: str) -> None:
+def make_backup_if_needed(filename: Path) -> None:
+    """If the given FILENAME exists, rename it ith a '.bak' suffix.
+    If the backup file also exists, rename that unconditionally with
+    a '.bak2' suffix.  The number of backups is thus capped at 2."""
+    if filename.exists(): # Could test if it's a normal file
+        # Take the existing file and rename it, which is
+        # faster than copying it
+        backup_target = filename.with_suffix('.bak')
+        if backup_target.exists():
+            # If the '.bak2' file exists, just replace it
+            backup_target.replace(filename.with_suffix('.bak2')) # type: ignore
+        filename.rename(filename.with_suffix('.bak'))
+
+def write_ids(namelist: list[dict[str, str]], filename: Path) -> None:
     # newline='' below is needed to prevent blank lines
     #   between the rows
+    # Make a backup if needed
+    make_backup_if_needed(filename)
     with open(filename, 'w', newline='') as f:
         #['lastname', 'firstname', 'userid']
         fields = namelist[0].keys() 
@@ -50,11 +66,11 @@ def main(args: list[str]) -> int:
     #          "O'Brian, Brian B."
     #          ]
 
-    names: list[dict[str,str]] = read_names('names.csv')
+    names: list[dict[str,str]] = read_names(Path('names.csv'))
     for name in names:
         name['userid'] = make_id(name)
         #print(f"{name['lastname']}, {name['firstname']}: {name['userid']}")
-    write_ids(names, 'userids.csv')
+    write_ids(names, Path('userids.csv'))
 
     return 0
 
