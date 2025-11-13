@@ -25,6 +25,7 @@ def simulateRally(pA: float, pB: float, a_serves: bool) -> bool:
     team A won the rally.'''
     a_wins: bool = False    # Default: Team B wins the point
     rand: float = random.random()
+    #print(rand)
     if a_serves:
         if rand < pA:       # Team A won the point
             a_wins = True
@@ -49,6 +50,8 @@ def simulate1Game(pA: float, pB: float, sideout_scoring: bool) -> bool:
 
     while not gameOver(ptsA, ptsB, win_pts):
         a_point: bool = simulateRally(pA, pB, a_serving)
+        # if not sideout_scoring:
+        #     print(ptsA, ptsB, a_serving, a_point)
         if sideout_scoring:
             if a_serving:
                 if a_point:
@@ -88,6 +91,8 @@ def simulateNGames(n: int, pA: float, pB: float, sideout: bool = False) -> float
             winsA = winsA + 1
         else:
             winsB = winsB + 1
+        # if sideout:
+        #     print(winsA, winsB, a_won)
     return winsA / n
 
 def main(args: list[str]) -> int:

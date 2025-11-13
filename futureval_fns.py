@@ -8,18 +8,24 @@ from graphics import *
 from typing import cast
 import math
 
-def read_loan() -> tuple[float, float, int]:
-    p, rate, periods = 0, 0, 0
+def parseLoan(p_str: str, rate_str: str, period_str: str) -> tuple[float,float,int]:
     try:
-        p = float(input('Please enter an amount to borrow: $'))
-        rate = float(input('Please enter the interest rate, in percent: '))
-        periods = int(input('How many months are in the life of the loan? '))
+        p = float(p_str)
+        rate = float(rate_str)
+        periods = int(period_str)
         if (not p > 0) or (not rate > 0) or periods <= 0:
             raise ValueError
     except ValueError:
-        print('The balance, rate, and periods must all be positive numbers, with no dollar sign, commas, or percent sign.')
+        raise ValueError('The balance, rate, and periods must all be positive numbers, with no dollar sign, commas, or percent sign.')
     else:
         print('Borrowing $', p, 'at', rate, "% for", periods, 'months:')
+    return p, rate, periods
+
+def read_loan() -> tuple[float, float, int]:
+    p_str = input('Please enter an amount to borrow: $')
+    rate_str = input('Please enter the interest rate, in percent: ')
+    period_str = input('How many months are in the life of the loan? ')
+    p, rate, periods = parseLoan(p_str, rate_str, period_str)
     # Loan amount, annual interest rate, number of loan periods
     return p, rate, periods
 
@@ -105,12 +111,16 @@ def drawBarGraph(balances: list[float]) -> None:
 def main(args: list[str]) -> int:
     # Input: get the parameters of the loan
     # Accumulator variable
-    p, rate, periods = read_loan()
-    payment = 566.14
-    if periods > 0 and p > 0:
-        balances: list[float] = calc_balances(p, (rate/12)/100, periods, payment)
-        printTable(balances, payment)
-        drawBarGraph(balances)
+    try:
+        p, rate, periods = read_loan()
+    except ValueError as e:
+        print(e.args[0])
+    else:
+        payment = 566.14
+        if periods > 0 and p > 0:
+            balances: list[float] = calc_balances(p, (rate/12)/100, periods, payment)
+            printTable(balances, payment)
+            drawBarGraph(balances)
     return 0
 
 if __name__ == '__main__':
