@@ -29,7 +29,7 @@ def read_loan() -> tuple[float, float, int]:
     # Loan amount, annual interest rate, number of loan periods
     return p, rate, periods
 
-def calc_balances(p: float, rate: float, periods: int, payment: float):
+def calc_balances(p: float, rate: float, periods: int, payment: float) -> list[float]:
     # Loan amount, interest rate per loan period (periodic rate),
     #    number of loan periods, fixed payment amount
     balances: list[float] = [p]
@@ -60,7 +60,7 @@ def findTickInterval(max_val: float) -> float:
     MAX_TICKS = 20
     round_nums = [1, 2, 5, 10]
     power_of_ten = math.floor(math.log10(max_val)) - 1
-    tick_interval = 10 ** power_of_ten
+    tick_interval: int = 10 ** power_of_ten
     for num in round_nums:
         tick_interval = num * (10 ** power_of_ten)
         #print(max_val, tick_interval, max_val / tick_interval)
