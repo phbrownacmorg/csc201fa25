@@ -4,7 +4,6 @@ import unittest
 # import the code you want to test here
 from futureval_fns import parseLoan, findTickInterval, calc_balances, printTable
 
-
 class TestFutureval(unittest.TestCase):
 
     # Every method that starts with the string "test"
