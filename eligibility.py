@@ -34,7 +34,7 @@ def eligibleHR(age: int, cit: int) -> bool:
     """Takes two positive integers AGE and CIT (how long the person has been a
         U.S. citizen), and returns a boolean indicating whether the person
         is eligible to servve in the U.S. House of Representatives."""
-    return False
+    return age >= 25 and cit >= 7
 
 def eligibleSenate(age: int, cit: int) -> bool:
     """Takes two positive integers AGE and CIT (how long the person has been a
